@@ -25,16 +25,18 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-
     if([sender.currentTitle length]) {
         [sender setBackgroundImage:[UIImage imageNamed:@"CardBack"]
                           forState:UIControlStateNormal];
         [sender setTitle:@"" forState:UIControlStateNormal];
         
     } else {
-        [sender setBackgroundImage:[UIImage imageNamed:@"CardFront"]
-                          forState:UIControlStateNormal];
-        [sender setTitle:@"A♣️" forState:UIControlStateNormal];
+        Card *randomCard = [self.deck drawRandomCard];
+        if(randomCard) {
+            [sender setBackgroundImage:[UIImage imageNamed:@"CardFront"]
+                              forState:UIControlStateNormal];
+            [sender setTitle:[randomCard contents] forState:UIControlStateNormal];
+        }
     }
     self.flipCount++;
 }
